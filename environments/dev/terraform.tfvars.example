@@ -1,0 +1,6 @@
+# Example terraform.tfvars for development environment
+# Copy this file to terraform.tfvars and customize the values
+
+project_name = "my-static-site"
+aws_region   = "us-east-1"
+owner_email  = "developer@example.com"
