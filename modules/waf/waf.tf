@@ -8,7 +8,7 @@ resource "aws_wafv2_web_acl" "this" {
       for_each = var.default_action == "allow" ? [1] : []
       content {}
     }
-    
+
     dynamic "block" {
       for_each = var.default_action == "block" ? [1] : []
       content {}
@@ -38,10 +38,13 @@ resource "aws_wafv2_web_acl" "this" {
           name        = rule.value.managed_rule_group_name
           vendor_name = rule.value.vendor_name
 
-          dynamic "excluded_rule" {
+          dynamic "rule_action_override" {
             for_each = rule.value.excluded_rules
             content {
-              name = excluded_rule.value
+              name = rule_action_override.value
+              action_to_use {
+                count {}
+              }
             }
           }
         }
